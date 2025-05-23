@@ -1,0 +1,1 @@
+# pixijs-animated-character-class
