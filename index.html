@@ -71,12 +71,21 @@
 
         // === CREAR EL PERSONAJE CON ANIMACIONES ===
 
-        const result = await AnimatedCharacter.CreateCharacterWithManyAnimations(
-            animationConfigs,
+        // const result = await AnimatedCharacter.CreateCharacterWithManyAnimations(
+        //     animationConfigs,
+        //     frameW,
+        //     frameH,
+        //     directions
+        // );
+
+        const result = await AnimatedCharacter.CreateCharacterFromMegaSpritesheet(
+            'chica2.png',
             frameW,
             frameH,
+            animationConfigs,
             directions
         );
+
 
 
         const character = result.character;
@@ -112,48 +121,7 @@
                     character.changeDirection('right');
                     break;
 
-                // === ATAJOS DE ANIMACIONES (NÚMEROS) ===
-                case '1':
-                    character.changeAnimation('idle');
-                    break;
-                case '2':
-                    character.changeAnimation('walk');
-                    break;
-                case '3':
-                    character.changeAnimation('run');
-                    break;
-                case '4':
-                    character.changeAnimation('jump');
-                    break;
-                case '5':
-                    character.changeAnimation('combat_idle');
-                    break;
-                case '6':
-                    character.changeAnimation('slash');
-                    break;
-                case '7':
-                    character.changeAnimation('thrust');
-                    break;
-                case '8':
-                    character.changeAnimation('shoot');
-                    break;
-                case '9':
-                    character.changeAnimation('spellcast');
-                    break;
-                case '0':
-                    character.changeAnimation('sit');
-                    break;
 
-                // === ATAJOS DE ANIMACIONES (LETRAS) ===
-                case 'h':
-                    character.changeAnimation('hurt');
-                    break;
-                case 'e':
-                    character.changeAnimation('emote');
-                    break;
-                case 'c':
-                    character.changeAnimation('climb');
-                    break;
             }
         });
 
@@ -175,6 +143,21 @@
             console.log('');
             console.log('💡 Tip: Usa character.changeAnimation("nombre") en la consola para más control');
         }, 1000);
+
+
+        function createUI() {
+            for (let anim of Object.keys(AnimatedCharacter.bigSpriteAnimationConfigs)) {
+                const button = document.createElement('button');
+                button.textContent = anim;
+                button.addEventListener('click', () => {
+                    character.changeAnimation(anim);
+                });
+                document.body.appendChild(button);
+            }
+        }
+
+        createUI()
+
     </script>
 </body>
 </html>
